@@ -444,6 +444,79 @@ CREATE INDEX idx_game_results_points_earned ON game_results(points_earned);
 
 ---
 
+## GAMIFICATION & BADGES TABLES
+
+### 13. BADGES Table
+
+Defines available badges, tiers, points, and unlock criteria
+
+```sql
+CREATE TABLE badges (
+  badge_id BIGSERIAL PRIMARY KEY,
+  code VARCHAR(50) NOT NULL UNIQUE,
+  name VARCHAR(100) NOT NULL,
+  description TEXT NOT NULL,
+  category VARCHAR(50) NOT NULL CHECK (category IN ('ACADEMIC', 'COMMUNITY')),
+  tier VARCHAR(20) NOT NULL DEFAULT 'BRONZE' CHECK (tier IN ('BRONZE', 'SILVER', 'GOLD', 'PLATINUM', 'DIAMOND')),
+  badge_points INTEGER NOT NULL DEFAULT 10,
+  icon_url VARCHAR(255),
+  criteria_type VARCHAR(50) NOT NULL,
+  criteria_threshold INTEGER NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes
+CREATE INDEX idx_badges_code ON badges(code);
+CREATE INDEX idx_badges_category ON badges(category);
+CREATE INDEX idx_badges_tier ON badges(tier);
+```
+
+**Columns:**
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| badge_id | BIGSERIAL | PRIMARY KEY | Unique badge identifier |
+| code | VARCHAR(50) | NOT NULL, UNIQUE | Unique identifier string (e.g. `QUIZ_ROOKIE`) |
+| name | VARCHAR(100) | NOT NULL | Display name of the badge |
+| description | TEXT | NOT NULL | Unlock explanation and flavor text |
+| category | VARCHAR(50) | NOT NULL, CHECK | ACADEMIC, COMMUNITY, SPECIAL, STREAK |
+| tier | VARCHAR(20) | NOT NULL, CHECK | BRONZE, SILVER, GOLD, PLATINUM, DIAMOND |
+| badge_points | INTEGER | NOT NULL | Points awarded towards Badge Rank |
+| icon_url | VARCHAR(255) | NULLABLE | URL/Asset path to badge icon |
+| criteria_type | VARCHAR(50) | NOT NULL | Metric tracked (ATTEMPTS, WINS, STREAK) |
+| criteria_threshold | INTEGER | NOT NULL | Required count/value to unlock |
+| created_at | TIMESTAMP | NOT NULL | Creation timestamp |
+
+---
+
+### 14. USER_BADGES Table
+
+Tracks badges earned by individual users
+
+```sql
+CREATE TABLE user_badges (
+  user_badge_id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+  badge_id BIGINT NOT NULL REFERENCES badges(badge_id) ON DELETE CASCADE,
+  earned_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, badge_id)
+);
+
+-- Indexes
+CREATE INDEX idx_user_badges_user_id ON user_badges(user_id);
+CREATE INDEX idx_user_badges_badge_id ON user_badges(badge_id);
+CREATE INDEX idx_user_badges_earned_at ON user_badges(earned_at);
+```
+
+**Columns:**
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| user_badge_id | BIGSERIAL | PRIMARY KEY | Unique user-badge record identifier |
+| user_id | BIGINT | NOT NULL, FK | Student who earned the badge |
+| badge_id | BIGINT | NOT NULL, FK | Badge unlocked |
+| earned_at | TIMESTAMP | NOT NULL | Unlock timestamp |
+
+---
+
 ## LEADERBOARD VIEWS
 
 ### Education Leaderboard View
@@ -503,8 +576,7 @@ ORDER BY total_points DESC;
 ```sql
 CREATE VIEW community_leaderboard_by_game_type AS
 SELECT 
-  ROW_NUMBER() OVER (PARTITION BY gt.name ORDER BY SUM(gr.points_earned) DESC) as rank,
-  gt.name as game_type,
+  ROW_NUMBER() OVER (PARTITION BY gt.name ORDER BY SUM(gr.points_earned) DESC) as rank,  gt.name as game_type,
   u.user_id,
   u.name,
   COALESCE(SUM(gr.points_earned), 0) as total_points,
@@ -521,6 +593,116 @@ ORDER BY gt.name, total_points DESC;
 
 ---
 
+### Academic / Studies Badge Leaderboard View
+
+Ranks students strictly on quiz & study badges, with study-specific tier titles:
+
+```sql
+CREATE VIEW academic_badge_leaderboard AS
+SELECT 
+  ROW_NUMBER() OVER (
+    ORDER BY 
+      COALESCE(SUM(b.badge_points), 0) DESC, 
+      COUNT(ub.badge_id) DESC
+  ) AS rank,
+  u.user_id,
+  u.name,
+  u.email,
+  COALESCE(SUM(b.badge_points), 0) AS total_academic_points,
+  COUNT(ub.badge_id) AS total_academic_badges,
+  COUNT(CASE WHEN b.tier = 'BRONZE' THEN 1 END) AS bronze_badges,
+  COUNT(CASE WHEN b.tier = 'SILVER' THEN 1 END) AS silver_badges,
+  COUNT(CASE WHEN b.tier = 'GOLD' THEN 1 END) AS gold_badges,
+  COUNT(CASE WHEN b.tier = 'PLATINUM' THEN 1 END) AS platinum_badges,
+  COUNT(CASE WHEN b.tier = 'DIAMOND' THEN 1 END) AS diamond_badges,
+  CASE 
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 500 THEN 'Grand Scholar'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 300 THEN 'Master Academician'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 150 THEN 'Honor Student'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 75  THEN 'Quiz Scholar'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 25  THEN 'Study Apprentice'
+    ELSE 'Novice Learner'
+  END AS academic_tier_title,
+  MAX(ub.earned_at) AS last_study_badge_earned_at
+FROM users u
+LEFT JOIN user_badges ub ON u.user_id = ub.user_id
+LEFT JOIN badges b ON ub.badge_id = b.badge_id AND b.category = 'ACADEMIC'
+WHERE u.role = 'STUDENT'
+GROUP BY u.user_id, u.name, u.email
+ORDER BY total_academic_points DESC, total_academic_badges DESC;
+```
+
+---
+
+### Community Games Badge Leaderboard View
+
+Ranks students strictly on community game badges, with gaming-specific tier titles:
+
+```sql
+CREATE VIEW community_badge_leaderboard AS
+SELECT 
+  ROW_NUMBER() OVER (
+    ORDER BY 
+      COALESCE(SUM(b.badge_points), 0) DESC, 
+      COUNT(ub.badge_id) DESC
+  ) AS rank,
+  u.user_id,
+  u.name,
+  u.email,
+  COALESCE(SUM(b.badge_points), 0) AS total_game_points,
+  COUNT(ub.badge_id) AS total_game_badges,
+  COUNT(CASE WHEN b.tier = 'BRONZE' THEN 1 END) AS bronze_badges,
+  COUNT(CASE WHEN b.tier = 'SILVER' THEN 1 END) AS silver_badges,
+  COUNT(CASE WHEN b.tier = 'GOLD' THEN 1 END) AS gold_badges,
+  COUNT(CASE WHEN b.tier = 'PLATINUM' THEN 1 END) AS platinum_badges,
+  COUNT(CASE WHEN b.tier = 'DIAMOND' THEN 1 END) AS diamond_badges,
+  CASE 
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 500 THEN 'Grandmaster of Games'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 300 THEN 'Community Champion'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 150 THEN 'Master Tactician'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 75  THEN 'Veteran Duelist'
+    WHEN COALESCE(SUM(b.badge_points), 0) >= 25  THEN 'Game Challenger'
+    ELSE 'Recruit Player'
+  END AS game_tier_title,
+  MAX(ub.earned_at) AS last_game_badge_earned_at
+FROM users u
+LEFT JOIN user_badges ub ON u.user_id = ub.user_id
+LEFT JOIN badges b ON ub.badge_id = b.badge_id AND b.category = 'COMMUNITY'
+WHERE u.role = 'STUDENT'
+GROUP BY u.user_id, u.name, u.email
+ORDER BY total_game_points DESC, total_game_badges DESC;
+```
+
+---
+
+### Student Dual Badge Summary View
+
+Consolidates both rankings so the student can immediately see their rank in both Studies and Games side-by-side:
+
+```sql
+CREATE VIEW student_badge_summary AS
+SELECT 
+  u.user_id,
+  u.name,
+  u.email,
+  -- Studies Track
+  abl.rank AS academic_rank,
+  abl.total_academic_points,
+  abl.total_academic_badges,
+  abl.academic_tier_title,
+  -- Games Track
+  cbl.rank AS community_game_rank,
+  cbl.total_game_points,
+  cbl.total_game_badges,
+  cbl.game_tier_title
+FROM users u
+LEFT JOIN academic_badge_leaderboard abl ON u.user_id = abl.user_id
+LEFT JOIN community_badge_leaderboard cbl ON u.user_id = cbl.user_id
+WHERE u.role = 'STUDENT';
+```
+
+---
+
 ## Database Relationships Diagram
 
 USERS (1)
@@ -528,7 +710,8 @@ USERS (1)
 ├──> (1:N) QUIZZES (created_by)
 ├──> (1:N) ATTEMPTS (user_id)
 ├──> (1:N) GAME_SESSIONS (lorde_id)
-└──> (1:N) GAME_PARTICIPANTS (user_id)
+├──> (1:N) GAME_PARTICIPANTS (user_id)
+└──> (1:N) USER_BADGES (user_id)
 
 COURSES (1)
 └──> (1:N) QUIZZES (course_id)
@@ -537,7 +720,7 @@ CATEGORIES (1)
 └──> (1:N) QUIZZES (category_id)
 
 QUIZZES (1)
-└──> (1:N) QUESTIONS (quiz_id)
+├──> (1:N) QUESTIONS (quiz_id)
 └──> (1:N) ATTEMPTS (quiz_id)
 
 QUESTIONS (1)
@@ -556,6 +739,9 @@ GAME_SESSIONS (1)
 
 GAME_PARTICIPANTS (1)
 └──> (N:1) GAME_RESULTS (game_session_id + user_id)
+
+BADGES (1)
+└──> (1:N) USER_BADGES (badge_id)
 
 
 ---
@@ -578,6 +764,34 @@ INSERT INTO game_roles (game_type_id, role_name, role_description, winner_points
 (1, 'Mafia', 'Kill villagers', 150, 20, 1),
 (1, 'Villager', 'Protect village', 100, 10, 2),
 (1, 'Doctor', 'Save villagers', 120, 25, 3),
+(1, 'Sheriff', 'Investigate players', 120, 25, 4);
+```
+
+### Sample Badges & Tier Allocations
+
+```sql
+INSERT INTO badges (code, name, description, category, tier, badge_points, criteria_type, criteria_threshold) VALUES
+-- Academic Track
+('QUIZ_ROOKIE', 'Quiz Rookie', 'Completed your first quiz attempt', 'ACADEMIC', 'BRONZE', 10, 'ATTEMPTS_COUNT', 1),
+('QUIZ_PRO', 'Quiz Pro', 'Completed 10 quiz attempts', 'ACADEMIC', 'SILVER', 25, 'ATTEMPTS_COUNT', 10),
+('PERFECT_SCORE', 'Bullseye Genius', 'Scored a perfect 100% on any quiz', 'ACADEMIC', 'SILVER', 25, 'PERFECT_SCORE_COUNT', 1),
+('SCHOLAR_ELITE', 'Scholar Elite', 'Completed 25 quiz attempts', 'ACADEMIC', 'GOLD', 50, 'ATTEMPTS_COUNT', 25),
+('FLAWLESS_MASTER', 'Flawless Master', 'Scored 100% on 5 different quizzes', 'ACADEMIC', 'PLATINUM', 100, 'PERFECT_SCORE_COUNT', 5),
+
+-- Community Games Track
+('FIRST_GAME', 'Game Recruit', 'Participated in your first community game', 'COMMUNITY', 'BRONZE', 10, 'GAMES_PLAYED_COUNT', 1),
+('MAFIA_SURVIVOR', 'Mafia Survivor', 'Won 3 matches playing as Mafia or Villager', 'COMMUNITY', 'SILVER', 25, 'GAMES_WON_COUNT', 3),
+('GAME_CHAMPION', 'Game Champion', 'Won 10 community game sessions', 'COMMUNITY', 'GOLD', 50, 'GAMES_WON_COUNT', 10),
+('COMMUNITY_LEGEND', 'Community Legend', 'Won 25 community game sessions', 'COMMUNITY', 'DIAMOND', 200, 'GAMES_WON_COUNT', 25),
+
+-- Streaks & Special
+('DAILY_WARRIOR', 'Consistent Battler', 'Maintained a 3-day quiz activity streak', 'STREAK', 'BRONZE', 10, 'STREAK_DAYS', 3),
+('IRON_STREAK', 'Iron Scholar', 'Maintained a 7-day quiz activity streak', 'STREAK', 'GOLD', 50, 'STREAK_DAYS', 7);
+```
+
+---
+
+## Performance Considerations,
 (1, 'Sheriff', 'Investigate players', 120, 25, 4);
 ```
 
