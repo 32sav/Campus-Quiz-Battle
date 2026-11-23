@@ -65,7 +65,19 @@ function App() {
           {/* Redirect to dashboard if authenticated, else to login */}
           <Route
             path="/"
-            element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
+            element={
+              isAuthenticated ? (
+                user?.role === 'ADMIN' ? (
+                  <Navigate to="/admin" replace />
+                ) : user?.role === 'LORDE' ? (
+                  <Navigate to="/lorde" replace />
+                ) : (
+                  <Navigate to="/dashboard" replace />
+                )
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
           />
 
           {/* Catch all - redirect to home */}

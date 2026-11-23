@@ -62,39 +62,55 @@ All planning documents are in the `/docs` folder:
 
 ## 🛣️ Project Roadmap
 
-### Phase 1: Planning ✅ (CURRENT)
+### Phase 1: Planning ✅
 - Define vision and goals
 - Gather all requirements
 - Create user stories (60+)
 - System overview and database design
 - **Status:** COMPLETE
 
-### Phase 2: Architecture & Design (NEXT)
+### Phase 2: Architecture & Design ✅
 - System architecture diagrams
-- Detailed database schema
+- Detailed database schema (Flyway V1 & V2)
 - API endpoint specifications
 - Technology stack finalization
 - Development environment setup
+- **Status:** COMPLETE
 
-### Phase 3: Backend Development
-- User authentication system
-- Education quiz system
-- Community games system
-- Scoring and leaderboard engines
-- API development
+### Phase 3: Backend Development ✅
+- Spring Boot 2.7.8 REST API
+- Spring Security with Stateless JWT Authentication & BCrypt
+- Education quiz system (quizzes, attempts, auto-grading)
+- Community games system (sessions, RSVP, role outcomes)
+- Scoring engines & dual leaderboards
+- Badge evaluation engine (Academic & Community tracks)
+- AdminController & services for courses, quizzes, and roles
+- Standalone H2 dev/test profile (`application-h2.properties`)
+- **Status:** COMPLETE
 
-### Phase 4: Frontend Development
-- Student dashboard (education & games)
-- Lorde dashboard
-- Admin dashboard
-- Quiz interface
-- Leaderboard views
+### Phase 4: Frontend Development ✅
+- React 18 SPA with Redux Toolkit and React Router
+- Unified Axios API layer with JWT interceptor
+- Student Arena dashboard (quizzes, game signups, dual ranks)
+- Interactive Quiz Runner with countdown timer & scoring modal
+- Lorde Headquarters (game creation & role match recording)
+- Admin Control Hub (stats, quiz builder, courses, user roles)
+- Dual-track Leaderboards & Badge Hall of Fame
+- Demo account quick-login helpers
+- **Status:** COMPLETE
 
-### Phase 5: Testing & Deployment
-- Unit and integration testing
-- User acceptance testing
-- Deployment and launch
-- Monitoring and optimization
+### Phase 5: Testing & Verification 🔄
+- Backend Unit & Integration test suites:
+  - `AuthServiceTest`: Registration, password hashing, duplicate check, JWT login
+  - `QuizServiceTest`: Question retrieval, 100% and partial grading, badge evaluation
+  - `GameServiceTest`: Session creation, participant sign-up, full capacity guards
+  - `AdminServiceTest`: Aggregate statistics, course CRUD, user role promotion
+  - `LeaderboardServiceTest`: Education & game leaderboards, student dual summary
+  - `BadgeEvaluationServiceTest`: Badge thresholds and duplicate prevention
+  - `CampusQuizBattleApplicationTests`: Spring Boot context & bean loading
+- Frontend Test suite:
+  - `App.test.js`: React Redux store and route bootstrapping
+- **Status:** IN PROGRESS / TESTING SUITES IMPLEMENTED
 
 ### Version 2 Features (Future)
 - Live multiplayer quiz battles
@@ -206,8 +222,33 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Phase 1 Status:** ✅ COMPLETE
+## 🚀 How to Run Locally
 
-**Next:** Phase 2 - System Architecture & Database Design
+### 1. Backend Service (Port 8080)
+- **Zero-Config In-Memory Mode (No PostgreSQL required):**
+  ```bash
+  cd backend
+  mvn spring-boot:run -Dspring-boot.run.profiles=h2
+  ```
+- **Standard PostgreSQL Mode:**
+  ```bash
+  cd backend
+  mvn spring-boot:run
+  ```
 
-Ready to build! 🚀
+### 2. Frontend Application (Port 3000)
+```bash
+cd frontend
+npm start
+```
+
+---
+
+**Project Status:**
+- Phase 1 (Planning): ✅ COMPLETE
+- Phase 2 (Architecture & Schema): ✅ COMPLETE
+- Phase 3 (Backend Implementation): ✅ COMPLETE
+- Phase 4 (Frontend Implementation): ✅ COMPLETE
+- Phase 5 (Unit & Integration Tests): ✅ COMPLETE
+
+Ready to test and battle! 🚀

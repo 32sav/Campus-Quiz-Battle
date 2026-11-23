@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lorde Game Master Panel - Campus Quiz Battle</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/mafia.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-title">
+      <span>👑</span> Lorde Game Chamber
+    </a>
+    <ul class="nav-links">
+      <li><a href="lorde-dashboard.html" class="nav-link active">Game Master Hub</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="student-dashboard.html" class="nav-link">Student View</a></li>
+      <li><a href="login.html" class="btn btn-outline btn-sm">Sign Out</a></li>
+    </ul>
+  </header>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-heading">Lorde Game Master Console</h1>
+        <p class="dashboard-subheading">Create game sessions, register participants, and automatically assign roles via the Shuffle button</p>
+      </div>
+      <div>
+        <span class="stat-card-badge badge-lorde-certified">Certified Lorde</span>
+      </div>
+    </div>
+
+    <!-- Mafia Session Creator & Master Controls -->
+    <div class="mafia-panel">
+      <!-- Session Bar -->
+      <div class="mafia-panel-top">
+        <div>
+          <span class="mafia-badge badge-chief">Session: Friday Night Mafia</span>
+          <h2 class="mafia-panel-heading">Library Common Hall (Room 2B)</h2>
+          <p class="mafia-panel-sub">Total Participants: <strong id="playerCountLabel" class="hero-title-highlight">8 Registered Crew</strong></p>
+        </div>
+        <div class="mafia-actions-row">
+          <!-- Lorde Registration Trigger -->
+          <button class="btn btn-outline" onclick="openRegisterParticipantModal()">➕ Register Participant</button>
+          
+          <!-- Lorde Auto-Assign Shuffle Button -->
+          <button class="btn btn-shuffle" id="shuffleBtn" onclick="handleLordeShuffle()">
+            <span>🔀</span> Automatically Assign Roles (Shuffle)
+          </button>
+          
+          <!-- End Match Button -->
+          <button class="btn btn-outline" onclick="openResultModal()">🏆 Record Match Outcome</button>
+        </div>
+      </div>
+
+      <!-- Live Dynamic Role Breakdown -->
+      <div class="mafia-quotas-box">
+        <h4 class="mafia-quotas-heading">Calculated Role Distribution (Scales Automatically with Crew):</h4>
+        <div id="roleQuotasContainer">
+          <!-- Populated by MafiaEngine.render() -->
+        </div>
+      </div>
+
+      <!-- God-Eye Roster (Visible Only to Lorde) -->
+      <div class="section-panel-header">
+        <h3 class="font-bold">Lorde God-Eye Roster (All Participants & Roles)</h3>
+        <span class="text-muted font-sm">Click <strong>Shuffle</strong> to distribute roles across all registered crew</span>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Participant Name</th>
+            <th>Email</th>
+            <th>Assigned Role</th>
+            <th>Faction</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="lordeRosterBody">
+          <!-- Rendered dynamically by MafiaEngine in ../js/mafia.js -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal 1: Register New Participant Modal (Lorde Input) -->
+    <div id="registerParticipantModal" class="modal-overlay">
+      <div class="modal-dialog">
+        <h3 class="modal-title">Register Game Participant</h3>
+        <p class="modal-description">Add a student currently present in the room to this Mafia match.</p>
+
+        <form id="addParticipantForm" onsubmit="event.preventDefault(); submitNewParticipant();">
+          <div class="form-group">
+            <label class="form-label">Student Full Name</label>
+            <input type="text" id="newPartName" class="form-control" required placeholder="e.g. Jessica Williams">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Campus Email (optional)</label>
+            <input type="email" id="newPartEmail" class="form-control" placeholder="jessica.w@campus.edu">
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" onclick="closeRegisterParticipantModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Participant</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal 2: Match Outcome Adjudication Modal -->
+    <div id="matchModal" class="modal-overlay">
+      <div class="modal-dialog">
+        <h3 class="modal-title">Adjudicate Match Outcome</h3>
+        <p class="modal-description">Select the victorious faction. Points are disbursed to all participant ledgers.</p>
+
+        <div>
+          <label class="outcome-option-card">
+            <input type="radio" name="winningTeam" value="Village" checked>
+            <div>
+              <strong class="outcome-title-village">Village Crew Victory</strong>
+              <span class="outcome-sub">Chief (+130 pts), Doctor (+125 pts), Villagers (+100 pts)</span>
+            </div>
+          </label>
+
+          <label class="outcome-option-card">
+            <input type="radio" name="winningTeam" value="Imposters">
+            <div>
+              <strong class="outcome-title-imposter">Imposters Victory</strong>
+              <span class="outcome-sub">Imposters (+160 pts), Village survivors get participation</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-outline" onclick="closeResultModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="confirmEndSession()">Disburse Points & End Match</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/mafia.js"></script>
+  <script>
+    function openRegisterParticipantModal() {
+      document.getElementById('registerParticipantModal').classList.add('active');
+      document.getElementById('newPartName').focus();
+    }
+
+    function closeRegisterParticipantModal() {
+      document.getElementById('registerParticipantModal').classList.remove('active');
+      document.getElementById('newPartName').value = '';
+      document.getElementById('newPartEmail').value = '';
+    }
+
+    function submitNewParticipant() {
+      const name = document.getElementById('newPartName').value;
+      const email = document.getElementById('newPartEmail').value;
+      if (MafiaEngine.registerParticipant(name, email)) {
+        closeRegisterParticipantModal();
+      }
+    }
+
+    function handleLordeShuffle() {
+      const success = MafiaEngine.shuffleRoles();
+      if (success) {
+        const btn = document.getElementById('shuffleBtn');
+        btn.innerHTML = '<span>✅</span> Roles Automatically Shuffled!';
+        btn.classList.add('shuffled');
+        setTimeout(() => {
+          btn.innerHTML = '<span>🔀</span> Re-Shuffle Roles';
+          btn.classList.remove('shuffled');
+        }, 2500);
+      }
+    }
+
+    function openResultModal() {
+      document.getElementById('matchModal').classList.add('active');
+    }
+
+    function closeResultModal() {
+      document.getElementById('matchModal').classList.remove('active');
+    }
+
+    function confirmEndSession() {
+      const winner = document.querySelector('input[name="winningTeam"]:checked').value;
+      const ledger = MafiaEngine.recordMatchOutcome(winner);
+      let summary = `Session finalized! Victorious Faction: ${winner}\n\nPoint Ledger:\n`;
+      ledger.slice(0, 5).forEach(l => {
+        summary += `• ${l.name} (${l.role}): +${l.pointsAwarded} pts\n`;
+      });
+      if (ledger.length > 5) summary += `...and ${ledger.length - 5} more participants.`;
+      alert(summary);
+      closeResultModal();
+    }
+  </script>
+</body>
+</html>

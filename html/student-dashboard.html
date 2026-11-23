@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Arena - Campus Quiz Battle</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/mafia.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-title">
+      <span>⚔️</span> Campus Quiz Battle
+    </a>
+    <ul class="nav-links">
+      <li><a href="student-dashboard.html" class="nav-link active">Dashboard</a></li>
+      <li><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+      <li><a href="login.html" class="btn btn-outline btn-sm">Sign Out</a></li>
+    </ul>
+  </header>
+
+  <main class="dashboard-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-heading">Welcome, Alex Rivera 👋</h1>
+        <p class="dashboard-subheading">Computer Science & Engineering • Level 4 Challenger</p>
+      </div>
+      <div>
+        <span class="stat-card-badge badge-student-active">Active Student</span>
+      </div>
+    </div>
+
+    <!-- Hero Stats -->
+    <div class="hero-stats-grid">
+      <div class="stat-card">
+        <span class="stat-card-title">Academic Score</span>
+        <span class="stat-card-value">1,420 <span class="hero-title-highlight font-sm">pts</span></span>
+        <span class="text-muted font-sm">Rank #4 in Department</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Mafia Game Points</span>
+        <span class="stat-card-value">680 <span class="font-sm" style="color: var(--accent-gold);">pts</span></span>
+        <span class="text-muted font-sm">5 Matches Played • 4 Wins</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Secret Role History</span>
+        <span class="stat-card-value mt-1">
+          <span class="mafia-badge badge-chief">The Chief</span>
+        </span>
+        <span class="text-muted font-sm">Last Match: Village Victory</span>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchStudentTab('gamesTab', this)">🎭 Community Games (Mafia)</button>
+      <button class="tab-btn" onclick="switchStudentTab('quizzesTab', this)">📚 Academic Quizzes</button>
+      <button class="tab-btn" onclick="switchStudentTab('historyTab', this)">📜 Quiz History</button>
+    </div>
+
+    <!-- Tab 1: Community Games (Mafia) -->
+    <div id="gamesTab" class="tab-content active">
+      <div class="mafia-panel">
+        <div class="mafia-panel-top">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+              <span class="mafia-badge badge-imposter">Live Session #MF-104</span>
+              <span class="stat-card-badge badge-lorde-certified">IN PROGRESS</span>
+            </div>
+            <h2 class="mafia-panel-heading">Friday Night Mafia: Library Common Hall</h2>
+            <p class="mafia-panel-sub">Game Master: <strong>Lorde Marcus Vance</strong> • Location: 2nd Floor Study Room B</p>
+          </div>
+          <div style="text-align: right;">
+            <span class="hero-title-highlight font-bold" style="font-size: 1.25rem;">14 Crew Members</span>
+            <div class="text-muted font-sm">Role scaling: 3 Imposters, 1 Chief, 1 Doctor, 9 Villagers</div>
+          </div>
+        </div>
+
+        <!-- Secret Role Reveal Box -->
+        <div class="role-reveal-box" id="roleRevealCard">
+          <div id="roleCover">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🕵️‍♂️</div>
+            <h3 class="quiz-question-title">Your Secret Mafia Assignment</h3>
+            <p class="role-desc">The Game Master has distributed secret roles. Keep your screen hidden from surrounding players!</p>
+            <button class="btn btn-primary" onclick="toggleRoleReveal()">👁️ Tap to Reveal Secret Role</button>
+          </div>
+
+          <div id="roleRevealedContent" style="display: none;">
+            <span class="mafia-badge badge-chief font-sm">Faction: Village Crew</span>
+            <h2 class="role-title" style="color: var(--accent-gold);">THE CHIEF (Investigator)</h2>
+            <p class="role-desc">
+              You lead the Village inquiry. Each night phase, privately point to one player to learn whether they are an Imposter. Guide the daytime tribunal without exposing yourself to elimination!
+            </p>
+            <div class="role-instructions">
+              <strong>Chief Win Condition:</strong> Identify and eliminate all 3 Imposters during campus daytime voting.<br>
+              <strong>Reward:</strong> +130 Points on Village Victory (+20 participation).
+            </div>
+            <button class="btn btn-outline mt-2" onclick="toggleRoleReveal()">🔒 Hide Secret Role</button>
+          </div>
+        </div>
+
+        <!-- Live Crew Status Roster -->
+        <div class="mt-3">
+          <h3 class="font-bold mb-2">Session Crew Roster (14 / 14 Signed Up)</h3>
+          <div class="crew-roster-grid">
+            <div class="roster-card">
+              <div>
+                <div class="roster-player-name">Alex Rivera (You)</div>
+                <div class="hero-title-highlight font-sm">Confirmed In Room</div>
+              </div>
+              <span class="mafia-badge badge-chief">Chief</span>
+            </div>
+            <div class="roster-card">
+              <div>
+                <div class="roster-player-name">Jordan Taylor</div>
+                <div class="text-muted font-sm">Village Seat #2</div>
+              </div>
+              <span class="text-dim font-sm">Role Secret 🔒</span>
+            </div>
+            <div class="roster-card">
+              <div>
+                <div class="roster-player-name">Maya Patel</div>
+                <div class="text-muted font-sm">Village Seat #3</div>
+              </div>
+              <span class="text-dim font-sm">Role Secret 🔒</span>
+            </div>
+            <div class="roster-card">
+              <div>
+                <div class="roster-player-name">Liam Chen</div>
+                <div class="text-muted font-sm">Village Seat #4</div>
+              </div>
+              <span class="text-dim font-sm">Role Secret 🔒</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Academic Quizzes -->
+    <div id="quizzesTab" class="tab-content">
+      <div class="filter-bar">
+        <input type="text" class="search-input" placeholder="Search courses or topics (e.g. Data Structures, Networks)...">
+        <select class="filter-select">
+          <option>All Departments</option>
+          <option>Computer Science</option>
+          <option>Electrical Eng.</option>
+          <option>Business</option>
+        </select>
+      </div>
+
+      <div class="cards-grid">
+        <div class="quiz-card">
+          <div>
+            <div class="flex-between mb-1">
+              <span class="stat-card-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #38bdf8;">CS-301</span>
+              <span class="text-muted font-sm">⏱️ 10 Mins</span>
+            </div>
+            <h3 class="font-bold mb-1">Data Structures & Algorithms</h3>
+            <p class="text-muted font-sm mb-2">Trees, Graph traversals, Dynamic Programming, and complexity analysis.</p>
+          </div>
+          <div>
+            <div class="flex-between text-dim font-sm mb-2">
+              <span>5 Questions</span>
+              <span>Reward: +100 XP</span>
+            </div>
+            <a href="quiz-taker.html" class="btn btn-primary btn-full">Start Quiz Now</a>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <div>
+            <div class="flex-between mb-1">
+              <span class="stat-card-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid #a855f7;">CS-402</span>
+              <span class="text-muted font-sm">⏱️ 10 Mins</span>
+            </div>
+            <h3 class="font-bold mb-1">Computer Networks & Protocols</h3>
+            <p class="text-muted font-sm mb-2">TCP/IP stack, Socket programming, Subnetting, and Routing algorithms.</p>
+          </div>
+          <div>
+            <div class="flex-between text-dim font-sm mb-2">
+              <span>5 Questions</span>
+              <span>Reward: +100 XP</span>
+            </div>
+            <a href="quiz-taker.html" class="btn btn-primary btn-full">Start Quiz Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: History -->
+    <div id="historyTab" class="tab-content">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Subject / Activity</th>
+            <th>Outcome</th>
+            <th>Score / Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nov 22, 2026</td>
+            <td><span class="mafia-badge badge-chief">Mafia</span></td>
+            <td>Session #MF-103 (12 Players)</td>
+            <td><strong style="color: var(--accent-green);">Village Victory</strong></td>
+            <td>+130 pts</td>
+          </tr>
+          <tr>
+            <td>Nov 20, 2026</td>
+            <td><span class="stat-card-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Quiz</span></td>
+            <td>CS-301: Trees & Graphs</td>
+            <td>Completed (5/5)</td>
+            <td>100% (+100 pts)</td>
+          </tr>
+          <tr>
+            <td>Nov 18, 2026</td>
+            <td><span class="mafia-badge badge-imposter">Mafia</span></td>
+            <td>Session #MF-101 (10 Players)</td>
+            <td><strong style="color: var(--accent-red);">Imposter Win</strong></td>
+            <td>+160 pts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/mafia.js"></script>
+  <script>
+    function switchStudentTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function toggleRoleReveal() {
+      const cover = document.getElementById('roleCover');
+      const content = document.getElementById('roleRevealedContent');
+      const box = document.getElementById('roleRevealCard');
+      if (cover.style.display === 'none') {
+        cover.style.display = 'block';
+        content.style.display = 'none';
+        box.classList.remove('revealed');
+      } else {
+        cover.style.display = 'none';
+        content.style.display = 'block';
+        box.classList.add('revealed');
+      }
+    }
+  </script>
+</body>
+</html>

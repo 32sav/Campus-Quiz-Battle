@@ -3,119 +3,119 @@
 ## Functional Requirements
 
 ### Authentication
-- [ ] User registration (student, admin, and lorde)
-- [ ] User login
-- [ ] User logout
-- [ ] Password reset
-- [ ] User role management (student, admin, lorde)
+- [x] User registration (student, admin, and lorde)
+- [x] User login
+- [x] User logout
+- [x] Password reset / credential validation
+- [x] User role management (student, admin, lorde)
 
 ---
 
 ## SECTION 1: EDUCATIONAL QUIZZES
 
 ### Quiz System
-- [ ] Create quiz categories
-- [ ] Create quizzes (linked to courses)
-- [ ] Add questions to quizzes
-- [ ] Edit questions
-- [ ] Delete questions
-- [ ] Multiple-choice question format (A, B, C, D)
-- [ ] Define correct answers
-- [ ] Set quiz time limits
-- [ ] Display countdown timer during quiz
+- [x] Create quiz categories
+- [x] Create quizzes (linked to courses)
+- [x] Add questions to quizzes
+- [x] Edit questions
+- [x] Delete questions
+- [x] Multiple-choice question format (A, B, C, D)
+- [x] Define correct answers
+- [x] Set quiz time limits
+- [x] Display countdown timer during quiz
 
 ### Student Features (Education)
-- [ ] View available courses
-- [ ] View available quizzes by course
-- [ ] Select and start a quiz
-- [ ] Answer multiple-choice questions
-- [ ] See countdown timer
-- [ ] Submit quiz
-- [ ] Receive automatic score calculation
-- [ ] View quiz results
-- [ ] View previous quiz attempts
-- [ ] View personal best score per quiz
-- [ ] View current ranking on leaderboard
-- [ ] Access personal dashboard (education stats)
+- [x] View available courses
+- [x] View available quizzes by course
+- [x] Select and start a quiz
+- [x] Answer multiple-choice questions
+- [x] See countdown timer
+- [x] Submit quiz
+- [x] Receive automatic score calculation
+- [x] View quiz results
+- [x] View previous quiz attempts
+- [x] View personal best score per quiz
+- [x] View current ranking on leaderboard
+- [x] Access personal dashboard (education stats)
 
 ### Admin Features (Education)
-- [ ] Admin login
-- [ ] Create/edit courses
-- [ ] Create/edit quiz categories
-- [ ] Create/edit/delete quizzes
-- [ ] Create/edit/delete questions
-- [ ] View student results
-- [ ] View quiz statistics
-- [ ] Access admin dashboard
+- [x] Admin login
+- [x] Create/edit courses
+- [x] Create/edit quiz categories
+- [x] Create/edit/delete quizzes
+- [x] Create/edit/delete questions
+- [x] View student results
+- [x] View quiz statistics
+- [x] Access admin dashboard
 
 ### Education Leaderboard
-- [ ] Calculate and display global leaderboard (quiz points)
-- [ ] Rank students by total quiz score
-- [ ] Display leaderboard by course
-- [ ] Display leaderboard by category
-- [ ] Show ranking position
-- [ ] Update leaderboard in real-time after quiz submission
+- [x] Calculate and display global leaderboard (quiz points)
+- [x] Rank students by total quiz score
+- [x] Display leaderboard by course
+- [x] Display leaderboard by category
+- [x] Show ranking position
+- [x] Update leaderboard in real-time after quiz submission
 
 ---
 
 ## SECTION 2: COMMUNITY GAMES
 
 ### Game Types & Setup
-- [ ] Support multiple game types (Mafia, Werewolf, Among Us, etc.)
-- [ ] Define game templates (rules, roles, point values)
-- [ ] Set role-based point system
+- [x] Support multiple game types (Mafia, Werewolf, Among Us, etc.)
+- [x] Define game templates (rules, roles, point values)
+- [x] Set role-based point system
   - Example: Mafia winner gets 150 points, Villager winner gets 100 points
-- [ ] Customize points per game type
+- [x] Customize points per game type
 
 ### Lorde Features (Game Creator)
-- [ ] Lorde login (new role)
-- [ ] Create new game sessions
-- [ ] Set game type (Mafia, Werewolf, etc.)
-- [ ] Set time and location for game
-- [ ] Set date and time
-- [ ] Set maximum number of participants
-- [ ] Start game session
-- [ ] Randomly assign roles to participants
-- [ ] End game session
-- [ ] Input final results (who won, role-based scores)
-- [ ] View lorde dashboard (games created and managed)
-- [ ] View game statistics
+- [x] Lorde login (new role)
+- [x] Create new game sessions
+- [x] Set game type (Mafia, Werewolf, etc.)
+- [x] Set time and location for game
+- [x] Set date and time
+- [x] Set maximum number of participants
+- [x] Start game session
+- [x] Randomly assign roles to participants
+- [x] End game session
+- [x] Input final results (who won, role-based scores)
+- [x] View lorde dashboard (games created and managed)
+- [x] View game statistics
 
 ### Student Features (Community Games)
-- [ ] View upcoming community games
-- [ ] See game details (type, date, location, time, roles)
-- [ ] Sign up for a game
-- [ ] Cancel sign-up (before game starts)
-- [ ] Receive role assignment (automatically when game starts)
-- [ ] View game results after completion
-- [ ] View community game history
-- [ ] View earned points from games
-- [ ] Track wins by game type
-- [ ] Access personal community games stats
+- [x] View upcoming community games
+- [x] See game details (type, date, location, time, roles)
+- [x] Sign up for a game
+- [x] Cancel sign-up (before game starts)
+- [x] Receive role assignment (automatically when game starts)
+- [x] View game results after completion
+- [x] View community game history
+- [x] View earned points from games
+- [x] Track wins by game type
+- [x] Access personal community games stats
 
 ### Admin Features (Community Games)
-- [ ] Admin can view all game sessions
-- [ ] Admin can view game statistics
-- [ ] Admin can edit/delete game sessions
-- [ ] Admin can manage lordes
-- [ ] Admin can set default point values per role
+- [x] Admin can view all game sessions
+- [x] Admin can view game statistics
+- [x] Admin can edit/delete game sessions
+- [x] Admin can manage lordes
+- [x] Admin can set default point values per role
 
 ### Community Games Leaderboard
-- [ ] Calculate and display separate community games leaderboard
-- [ ] Rank students by total community game points
-- [ ] Display leaderboard by game type (Mafia wins, Werewolf wins, etc.)
-- [ ] Show ranking position
-- [ ] Display player stats (games played, wins, favorite role)
-- [ ] Update leaderboard after each game completes
+- [x] Calculate and display separate community games leaderboard
+- [x] Rank students by total community game points
+- [x] Display leaderboard by game type (Mafia wins, Werewolf wins, etc.)
+- [x] Show ranking position
+- [x] Display player stats (games played, wins, favorite role)
+- [x] Update leaderboard after each game completes
 
 ### Game Session Management
-- [ ] Create game session with participants
-- [ ] Random role assignment to participants
-- [ ] Track game start time
-- [ ] Track game end time
-- [ ] Record final results and winners
-- [ ] Store role-based points earned
-- [ ] Calculate participant scores based on role and outcome
+- [x] Create game session with participants
+- [x] Random role assignment to participants
+- [x] Track game start time
+- [x] Track game end time
+- [x] Record final results and winners
+- [x] Store role-based points earned
+- [x] Calculate participant scores based on role and outcome
 
 ---
 

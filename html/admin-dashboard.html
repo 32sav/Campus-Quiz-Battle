@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Command Center - Campus Quiz Battle</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="bg-dark text-light">
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-title">
+      <span>🛡️</span> Admin Command Center
+    </a>
+    <ul class="nav-links">
+      <li><a href="admin-dashboard.html" class="nav-link active">Admin Panel</a></li>
+      <li><a href="lorde-dashboard.html" class="nav-link">Lorde Hub</a></li>
+      <li><a href="student-dashboard.html" class="nav-link">Student Hub</a></li>
+      <li><a href="login.html" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Sign Out</a></li>
+    </ul>
+  </header>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;">System Administration</h1>
+        <p style="color: #94a3b8; margin: 0;">Manage academic curricula, question banks, Lorde appointments, and audit logs</p>
+      </div>
+      <div>
+        <span class="stat-card-badge" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #f87171;">Super Admin</span>
+      </div>
+    </div>
+
+    <div class="hero-stats-grid">
+      <div class="stat-card">
+        <span class="stat-card-title">Total Active Students</span>
+        <span class="stat-card-value">1,280</span>
+        <span style="font-size: 0.8rem; color: #4ade80;">↑ 12% this semester</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Accredited Lordes</span>
+        <span class="stat-card-value">18</span>
+        <span style="font-size: 0.8rem; color: #38bdf8;">Across 6 faculties</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Quiz Bank Questions</span>
+        <span class="stat-card-value">4,520</span>
+        <span style="font-size: 0.8rem; color: #eab308;">14 Active Courses</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-title">Mafia Matches Run</span>
+        <span class="stat-card-value">142</span>
+        <span style="font-size: 0.8rem; color: #4ade80;">98% Village or Imposter win</span>
+      </div>
+    </div>
+
+    <!-- Management Sections -->
+    <div style="background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Academic Course & Category Management</h3>
+        <button class="btn btn-primary" onclick="alert('Add course modal')">+ Add New Course</button>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Department</th>
+            <th>Question Count</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CS-301</strong></td>
+            <td>Data Structures & Algorithms</td>
+            <td>Computer Science</td>
+            <td>240</td>
+            <td>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Edit</button>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem; border-color: #ef4444; color: #f87171;">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>CS-402</strong></td>
+            <td>Computer Networks & Protocols</td>
+            <td>Computer Science</td>
+            <td>180</td>
+            <td>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Edit</button>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem; border-color: #ef4444; color: #f87171;">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>ENG-204</strong></td>
+            <td>Thermodynamics & Fluid Dynamics</td>
+            <td>Mechanical Engineering</td>
+            <td>145</td>
+            <td>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Edit</button>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem; border-color: #ef4444; color: #f87171;">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Lorde Promotion Section -->
+    <div style="background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 1rem 0;">User Role Administration & Lorde Promotion</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Email</th>
+            <th>Reputation</th>
+            <th>Current Role</th>
+            <th>Promote / Demote</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Marcus Vance</td>
+            <td>marcus.vance@campus.edu</td>
+            <td>99.4% (52 games)</td>
+            <td><span class="stat-card-badge" style="background: rgba(234, 179, 8, 0.2); color: #facc15;">Lorde</span></td>
+            <td>
+              <button class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Demote to Student</button>
+            </td>
+          </tr>
+          <tr>
+            <td>Alex Rivera</td>
+            <td>alex.rivera@campus.edu</td>
+            <td>98.1% (34 games)</td>
+            <td><span class="stat-card-badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80;">Student</span></td>
+            <td>
+              <button class="btn btn-primary" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Appoint as Lorde</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../js/app.js"></script>
+</body>
+</html>

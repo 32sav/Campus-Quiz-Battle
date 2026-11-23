@@ -269,3 +269,46 @@ label {
     transform: rotate(360deg);
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   MISSING UTILITY CLASSES
+   ════════════════════════════════════════════════════════════════ */
+
+.text-muted {
+  color: #6b7280;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.py-4 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}

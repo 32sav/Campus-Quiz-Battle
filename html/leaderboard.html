@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboards - Campus Quiz Battle</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/mafia.css">
+</head>
+<body class="bg-dark text-light">
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand-title">
+      <span>🏆</span> Leaderboards
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="student-dashboard.html" class="nav-link">Student Arena</a></li>
+      <li><a href="leaderboard.html" class="nav-link active">Leaderboard</a></li>
+      <li><a href="login.html" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Sign In</a></li>
+    </ul>
+  </header>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem;">Campus Standings & Honours</h1>
+        <p style="color: #94a3b8; margin: 0;">Celebrating academic excellence and master social deduction champions</p>
+      </div>
+      <div>
+        <span class="stat-card-badge" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8;">Fall Semester 2026</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchLeaderboardTab('academicBoard', this)">📚 Academic Champions</button>
+      <button class="tab-btn" onclick="switchLeaderboardTab('mafiaBoard', this)">🎭 Mafia Deduction Masters</button>
+    </div>
+
+    <!-- Academic Board -->
+    <div id="academicBoard" class="tab-content active">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Student Name</th>
+            <th>Major</th>
+            <th>Quizzes Taken</th>
+            <th>Avg Score</th>
+            <th>Academic Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #facc15; font-size: 1.1rem;">🥇 #1</strong></td>
+            <td><strong>Marcus Wright</strong></td>
+            <td>Computer Science</td>
+            <td>28</td>
+            <td>96.4%</td>
+            <td><strong style="color: #38bdf8;">2,840 pts</strong></td>
+          </tr>
+          <tr>
+            <td><strong style="color: #cbd5e1; font-size: 1.1rem;">🥈 #2</strong></td>
+            <td><strong>Elena Rostova</strong></td>
+            <td>Mechanical Eng.</td>
+            <td>24</td>
+            <td>94.8%</td>
+            <td><strong style="color: #38bdf8;">2,510 pts</strong></td>
+          </tr>
+          <tr>
+            <td><strong style="color: #b45309; font-size: 1.1rem;">🥉 #3</strong></td>
+            <td><strong>David Kim</strong></td>
+            <td>Business Admin.</td>
+            <td>22</td>
+            <td>92.1%</td>
+            <td><strong style="color: #38bdf8;">2,190 pts</strong></td>
+          </tr>
+          <tr style="background: rgba(56, 189, 248, 0.05); border-left: 3px solid #38bdf8;">
+            <td><strong>#4</strong></td>
+            <td><strong>Alex Rivera (You)</strong></td>
+            <td>Computer Science</td>
+            <td>16</td>
+            <td>91.5%</td>
+            <td><strong style="color: #38bdf8;">1,420 pts</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mafia Board -->
+    <div id="mafiaBoard" class="tab-content">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player Name</th>
+            <th>Signature Role</th>
+            <th>Matches</th>
+            <th>Win Rate</th>
+            <th>Mafia Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: #facc15; font-size: 1.1rem;">🥇 #1</strong></td>
+            <td><strong>Elena Rostova</strong></td>
+            <td><span class="mafia-badge badge-imposter">Imposter</span></td>
+            <td>19</td>
+            <td>78.9%</td>
+            <td><strong style="color: #eab308;">1,620 pts</strong></td>
+          </tr>
+          <tr>
+            <td><strong style="color: #cbd5e1; font-size: 1.1rem;">🥈 #2</strong></td>
+            <td><strong>Sarah Jenkins</strong></td>
+            <td><span class="mafia-badge badge-doctor">Doctor</span></td>
+            <td>15</td>
+            <td>73.3%</td>
+            <td><strong style="color: #eab308;">1,180 pts</strong></td>
+          </tr>
+          <tr>
+            <td><strong style="color: #b45309; font-size: 1.1rem;">🥉 #3</strong></td>
+            <td><strong>Alex Rivera (You)</strong></td>
+            <td><span class="mafia-badge badge-chief">The Chief</span></td>
+            <td>5</td>
+            <td>80.0%</td>
+            <td><strong style="color: #eab308;">680 pts</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function switchLeaderboardTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -347,3 +347,1108 @@
     padding: 0.5rem;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   HERO BANNERS & DASHBOARD TABS
+   ════════════════════════════════════════════════════════════════ */
+
+.hero-banner {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 2.2rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-banner.lorde-banner {
+  background: linear-gradient(135deg, #311b92 0%, #1e1b4b 100%);
+}
+
+.hero-banner.admin-banner {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+}
+
+.hero-title {
+  color: #f8fafc;
+  font-size: 2.2rem;
+}
+
+.hero-subtitle {
+  color: #cbd5e1;
+  max-width: 650px;
+}
+
+.badge-welcome {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.12);
+  color: #93c5fd;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 170px;
+}
+
+.stat-pill .pill-icon {
+  font-size: 1.8rem;
+}
+
+.stat-pill .pill-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-pill .pill-val {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.dashboard-nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  overflow-x: auto;
+}
+
+.dash-tab-btn {
+  background: transparent;
+  color: #64748b;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.dash-tab-btn:hover {
+  color: var(--primary-color);
+  background: #f1f5f9;
+}
+
+.dash-tab-btn.active {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   USER ROLES & PILLS
+   ════════════════════════════════════════════════════════════════ */
+
+.role-pill {
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-student {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-lorde {
+  background-color: #ede9fe;
+  color: #6b21a8;
+}
+
+.badge-admin {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.user-profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.btn-logout {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   QUIZ LIST & CARDS
+   ════════════════════════════════════════════════════════════════ */
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #475569;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  background: white;
+  border: 1px solid var(--border-color);
+  color: #475569;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-pill.active,
+.filter-pill:hover {
+  background: #eff6ff;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.quiz-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-card-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag-course {
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.tag-category {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.quiz-card-title {
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.quiz-card-description {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0.5rem 0 1rem;
+  flex-grow: 1;
+}
+
+.quiz-card-meta {
+  display: flex;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.btn-start-quiz {
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   QUIZ TAKER
+   ════════════════════════════════════════════════════════════════ */
+
+.quiz-taker-wrapper {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.quiz-taker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.course-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.quiz-timer {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.quiz-timer.urgent {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.option-btn:hover {
+  border-color: var(--primary-color);
+  background: #f8fafc;
+}
+
+.option-btn.selected {
+  border-color: var(--primary-color);
+  background: #eff6ff;
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #334155;
+}
+
+.option-btn.selected .option-label {
+  background: var(--primary-color);
+  color: white;
+}
+
+.option-text {
+  font-size: 1.05rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.btn-submit-quiz {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-submit-quiz:hover {
+  background: #059669;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MODALS & RESULTS
+   ════════════════════════════════════════════════════════════════ */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  width: 100%;
+  animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.result-card {
+  max-width: 500px;
+  padding: 2.5rem;
+}
+
+.result-trophy {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.result-score-box {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.percentage-pill {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.percentage-pill.high {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.percentage-pill.pass {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.percentage-pill.low {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.new-badges-section {
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.badges-title {
+  color: #854d0e;
+  margin-bottom: 0.75rem;
+}
+
+.badge-unlock-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.badge-icon {
+  font-size: 2rem;
+}
+
+.badge-name {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.badge-desc {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.badge-points {
+  font-weight: 700;
+  color: #16a34a;
+  font-size: 0.85rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DUAL-TRACK BADGES PROGRESSION
+   ════════════════════════════════════════════════════════════════ */
+
+.track-card {
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.track-card.academic-track {
+  border-color: #bfdbfe;
+  background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+}
+
+.track-card.community-track {
+  border-color: #ddd6fe;
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+}
+
+.track-avatar {
+  font-size: 2.5rem;
+}
+
+.tier-label {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.tier-label.academic {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.tier-label.gaming {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.rank-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.rank-circle.gaming {
+  background: #8b5cf6;
+}
+
+.rank-hash {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.rank-value {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.stat-box {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0.25rem;
+}
+
+.perk-item {
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 0.35rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   GAME CARD CAPACITIES & BUTTONS
+   ════════════════════════════════════════════════════════════════ */
+
+.game-type-pill {
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-pill {
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-pill.scheduled {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-pill.completed {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.capacity-track {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.capacity-fill {
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s;
+}
+
+.capacity-fill.full {
+  background: #ef4444;
+}
+
+.btn-signed-up {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+  cursor: default;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.btn-outline:hover {
+  background: #f8fafc;
+}
+
+.btn-close {
+  background: transparent;
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  color: #94a3b8;
+}
+
+.btn-close:hover {
+  color: #0f172a;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LEADERBOARDS
+   ════════════════════════════════════════════════════════════════ */
+
+.leaderboard-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tab-btn {
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #0f172a;
+  color: white;
+}
+
+.top-tier-row {
+  background-color: #faf5ff;
+}
+
+.player-name {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.accuracy-pill, .winrate-pill {
+  background: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.points-pill {
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.points-pill.academic {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.points-pill.gaming {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.badge-count-pill {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.badge-count-pill.gaming {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+.rank-badge.default {
+  background: #e2e8f0;
+  color: #475569;
+  width: 28px;
+  height: 28px;
+  font-size: 0.85rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ADMIN STATS METRIC CARDS
+   ════════════════════════════════════════════════════════════════ */
+
+.stat-metric-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.pill-btn {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.pill-btn.win {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.pill-btn.lose {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.btn-remove-sm {
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MISSING / ADDITIONAL STYLES
+   ════════════════════════════════════════════════════════════════ */
+
+/* Navbar brand icon and auth links */
+.brand-icon {
+  font-size: 1.3rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-login-link,
+.btn-register-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.btn-login-link:hover {
+  color: var(--primary-color);
+}
+
+.btn-register-link {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-register-link:hover {
+  background: #2563eb;
+}
+
+/* Game card detail rows */
+.game-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.detail-icon {
+  font-size: 1rem;
+  min-width: 20px;
+}
+
+/* Badge role pill in results modal */
+.badge-role {
+  background: #ede9fe;
+  color: #6b21a8;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Badge rank items in leaderboard */
+.badge-rank-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.badge-rank-item {
+  background: white;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.rank-num {
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  min-width: 32px;
+}
+
+.badge-item-name {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.badge-hall-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Status pill for in-progress */
+.status-pill.in_progress,
+.status-pill.in-progress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-pill.waiting {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-pill.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Start / End game action buttons for Lorde */
+.btn-start-game {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-start-game:hover {
+  background: #059669;
+}
+
+.btn-end-game {
+  background: var(--warning-color);
+  color: white;
+}
+
+.btn-end-game:hover {
+  background: #d97706;
+}
+
+/* Cancel signup button */
+.btn-cancel-signup {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-cancel-signup:hover {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+/* Lorde game actions (multiple buttons) */
+.lorde-game-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Quiz history styles */
+.attempt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.15s;
+}
+
+.attempt-row:last-child {
+  border-bottom: none;
+}
+
+.attempt-row:hover {
+  background: #f8fafc;
+}
+
+.attempt-quiz-title {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.attempt-meta {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.score-badge.high {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.score-badge.mid {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.score-badge.low {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Admin game management section */
+.admin-games-table {
+  width: 100%;
+}
+
+/* Toast notification system */
+.toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 380px;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  animation: toastIn 0.25s ease-out;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.toast-success {
+  border-left: 4px solid var(--secondary-color);
+}
+
+.toast-error {
+  border-left: 4px solid var(--danger-color);
+}
+
+.toast-warning {
+  border-left: 4px solid var(--warning-color);
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #94a3b8;
+  padding: 0;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Responsive fixes for game card details */
+@media (max-width: 480px) {
+  .hero-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quick-stats-strip {
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    min-width: 140px;
+    flex: 1;
+  }
+}
